@@ -14,6 +14,9 @@ import webapp2
 import logging
 import json
 import urllib
+import csv
+import io
+from collections import Counter
 
 
 
@@ -90,27 +93,24 @@ def index():
     template = JINJA_ENVIRONMENT.get_template('templates/index.html')
     #request = service.column().list(tableId=TABLE_ID)
     #res = get_all_data(make_query([], query_values, 5)) #5 is our limit we're passing in
-    infile = open('test.csv', 'r')
-    columns = infile.readline()
-    columns = columns.rstrip('\n')
-    columns = columns.split(',')
+    infile = open('data/pyeongChang20180212-184638.json', 'r')
+    columns = ["Screen Name", "Text", "Date-time"]
     rows = []
+    hashtag = []
     for line in infile:
-    	temp = line.rstrip('\n')
-    	rows.append(temp.split(','))
+    	t = json.loads(line)
+    	rows.append([t['user']['screen_name'], t['text'], t['created_at']])
+    	if len(t['entities']['hashtags']) > 0:
+    		for h in t['entities']['hashtags']:
+    			hashtag.append(h['text'])
     infile.close()
-    	
-    infile2 = open('test2.csv', 'r')
-    columns2 = infile2.readline()
-    columns2 = columns2.rstrip('\n')
-    columns2 = columns2.split(',')
+    
+    hash_dic = Counter(hashtag)
+    columns2 = ['Hashtag', 'Count']
     rows2 = []
-    for line in infile2:
-    	temp = line.rstrip('\n')
-    	rows2.append(temp.split(','))
-    	
-    logging.info('allheaders')
-    #return template.render(columns=res['columns'], rows = res['rows'] )
+    for i in hash_dic.most_common(20):
+    	rows2.append(list(i))
+	
     return template.render(columns=columns, rows = rows, columns2 = columns2, rows2 = rows2 )
 
 @app.route('/_update_table', methods=['POST']) 
