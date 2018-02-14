@@ -45,28 +45,57 @@
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
-	<h1>Quality: About This Data Set</h1>
-        <p>Write a brief summary about the quality of the data set here</a></p>
+	<h2>Discussion of Data Quality</h2>
+        <p>Brief Summary of the the quality of the data is presented here</a></p>
       </div>
 
     
       <div class="page-header">
 	<h2>Is the data complete?</h2>
-	<p>If not, what is missing and what concerns does it raise?
-	What is your evidence for this?</p>
+	<p>The data is a nearly complete data set of all Twitter data that 
+	contains the "place" attribute that is within 100 miles of the 
+	Pyeong Chang Olympic Stadium for the time period of interest. Note that this includes both those users that have geolocation on, as well as those users that allow Twitter
+	to generally infer their location.  The plot below 
+	provides a view of the spatial and temporal distribution of the data.  It also provides the distribution across languages.  
+
+	</p>
       </div>
+      
+  
+   <div class="image123">
+    <div class="imgContainer">
+        <img src="../static/bluemarble.png" alt="map" style="width:300px;border:10;>   
+        <p>This is image 1</p>
+    </div>
+    <div class="imgContainer">
+         <img src="../static/time_hist.png" alt="histogram" style="width:300px;border:10;>   
+        <p>This is image 2</p>
+    </div>
+    <div class="imgContainer">
+          <img src="../static/language.png" alt="barchart" style="width:300px;border:10;>   
+        <p>This is image 3</p>
+    </div>
+</div>
       
       <div class="page-header">
 	<h2>Is the data coherent?</h2>
-	<p>Does it make sense relative to itself? Does it match your
-	expectations? Are the distributions sensible? What is your
-	evidence for this?</p>
+	<p> Overall the distributions matched our expectations after taking it all into consideration.  
+	At first it seemed like we had a high volume of non-olympic "noise" in the data.  After
+	plotting the map above, however, we realized that our radius was too big, and we were picking
+	up alot of the normal Twitter 'chatter' coming out of Seoul, Korea.  In later iterations of this
+	we intend to shrink our radius in order to eliminate this noise.  
+	
+</p>
       </div>
 
       <div class="page-header">
 	<h2>Is the data correct?</h2>
-	<p>What aspects of this data can you verify? How did you do so? What did
-	you find?</p>
+	<p>The data is accurate and correct, as long as you understand the underlying population usage
+	and the collection technique described above.  Any use of this data cannot be used to provide statistical
+	inference on the entire Korean Population, or on the entire population of visitors watching the games,
+	since Twitter users are not randomly "sprinkled" over either population.  That being said, this does
+	provide a great source of data to understand the conversation that is originating and emerging from right 
+	around the Olympic Games.  </p>
       </div>
 
     </div> <!-- /container -->

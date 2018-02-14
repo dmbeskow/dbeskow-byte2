@@ -29,61 +29,61 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 # This API key is provided by google as described in the tutorial
-API_KEY = 'AIzaSyD_G3D9NfAMxb5xIaolKSU_udWB0-zDfnk'
+#API_KEY = 'XXXXXXXXXXXXXX'
 
 # This uses discovery to create an object that can talk to the 
 # fusion tables API using the developer key
-service = build('fusiontables', 'v1', developerKey=API_KEY)
+#service = build('fusiontables', 'v1', developerKey=API_KEY)
 
 # This is the table id for the fusion table
-TABLE_ID = '1VlPiBCkYt_Vio-JT3UwM-U__APurJvPb6ZEJPg'
+#TABLE_ID = 'XXXXXXXXXXXXXX'
 
 # This is the default columns for the query
-query_cols = []
-query_values = ['Forlan'] #Change to be the value(s) you're querying in the column you've specified
+#query_cols = []
+#query_values = ['Forlan'] #Change to be the value(s) you're querying in the column you've specified
 
 # Import the Flask Framework
 from flask import Flask, request
 app = Flask(__name__)
 
-def get_all_data(query):
-    #Example from the assignment instructions
-    query = "SELECT * FROM " + TABLE_ID + " WHERE  Scorer = 'Forlan' LIMIT 16"
-    response = service.query().sql(sql=query).execute()
-    logging.info(response['columns'])
-    logging.info(response['rows'])
+#def get_all_data(query):
+#    #Example from the assignment instructions
+#    query = "SELECT * FROM " + TABLE_ID + " WHERE  Scorer = 'Forlan' LIMIT 16"
+#    response = service.query().sql(sql=query).execute()
+#    logging.info(response['columns'])
+#    logging.info(response['rows'])
     
-    response = service.query().sql(sql=query).execute()
-    logging.info(response['columns'])
-    logging.info(response['rows'])
-    return response
+#    response = service.query().sql(sql=query).execute()
+#    logging.info(response['columns'])
+#    logging.info(response['rows'])
+#    return response
 
 # make a query given a set of columns to retrieve
-def make_query(cols, values, limit):
-    string_cols = ""
-    if cols == []:
-        cols = ['*']
-    for col in cols:
-        if (' ' in col) == True:
-            string_cols = string_cols + ", '" + col + "'" #Columns that are more than one word need to be wrapped in single quotes
-        else:
-            string_cols = string_cols + ", " + col
-    string_cols = string_cols[2:len(string_cols)]
+#def make_query(cols, values, limit):
+ #   string_cols = ""
+  #  if cols == []:
+  #      cols = ['*']
+ #   for col in cols:
+   #     if (' ' in col) == True:
+ #           string_cols = string_cols + ", '" + col + "'" #Columns that are more than one word need to be wrapped in single quotes
+ #       else:
+ #           string_cols = string_cols + ", " + col
+ #   string_cols = string_cols[2:len(string_cols)]
 
-    string_values = ""
-    for val in values:
-        string_values = string_values + ", " + val
-    string_values = string_values[2:len(string_values)]
+ #   string_values = ""
+ #   for val in values:
+ #       string_values = string_values + ", " + val
+ #   string_values = string_values[2:len(string_values)]
     
-    #Change this query to have your corresponding column (in our soccer example, the column for our WHERE is Scorer).
-    query = "SELECT " + string_cols + " FROM " + TABLE_ID + " WHERE Scorer = '" + string_values + "'"
+ #   #Change this query to have your corresponding column (in our soccer example, the column for our WHERE is Scorer).
+ #   query = "SELECT " + string_cols + " FROM " + TABLE_ID + " WHERE Scorer = '" + string_values + "'"
 
-    query = query + " LIMIT " + str(limit)
+ #   query = query + " LIMIT " + str(limit)
 
-    logging.info(query)
-    # query = "SELECT * FROM " + TABLE_ID + " WHERE  Scorer = 'Forlan' LIMIT 5"
+ #   logging.info(query)
+ #   # query = "SELECT * FROM " + TABLE_ID + " WHERE  Scorer = 'Forlan' LIMIT 5"
 
-    return query
+#    return query
     
 # Note: We don't need to call run() since our application is embedded within
 # the App Engine WSGI application server.
@@ -113,14 +113,14 @@ def index():
 	
     return template.render(columns=columns, rows = rows, columns2 = columns2, rows2 = rows2 )
 
-@app.route('/_update_table', methods=['POST']) 
-def update_table():
-    logging.info(request.get_json())
-    cols = request.json['cols']
-    logging.info(cols)
-    result = get_all_data(make_query(cols, query_values, 100))
-    logging.info(result)
-    return json.dumps({'content' : result['rows'], 'headers' : result['columns']})
+#@app.route('/_update_table', methods=['POST']) 
+#def update_table():
+#    logging.info(request.get_json())
+#    cols = request.json['cols']
+#    logging.info(cols)
+#    result = get_all_data(make_query(cols, query_values, 100))
+ #   logging.info(result)
+ #   return json.dumps({'content' : result['rows'], 'headers' : result['columns']})
 
 @app.route('/about')
 def about():
